@@ -22,6 +22,7 @@ This repository contains a **compiled Flutter web application** (build output), 
 **Important**: This appears to be a production build directory, not a development environment. There are no source files, build scripts, or development dependencies present.
 
 For development work, you would typically need:
+
 - The original Flutter source code (`.dart` files)
 - `pubspec.yaml` for dependencies
 - Flutter development environment
@@ -45,5 +46,40 @@ This Flutter web app is configured for GitHub Pages deployment at `/web-metal/` 
 - **Asset paths**: All relative paths (icons, manifest, JS files) resolve correctly with the base href
 
 ### Deployment URL
+
 - Live site: `https://gitkola.github.io/web-metal/`
+- Privacy Policy page: `https://gitkola.github.io/web-metal/#/privacy-policy-web`
 - Local development: `http://localhost:3000` (requires different base href: `/`)
+
+## Local Development Commands
+
+Since this is a compiled Flutter web app, there are no build commands available. For local testing:
+
+```bash
+# Serve the docs directory locally on port 8000
+python3 -m http.server 8000 --directory docs
+
+# Alternative using Node.js (if available)
+npx serve docs -p 8000
+
+# Alternative using PHP (if available)
+php -S localhost:8000 -t docs
+```
+
+**Note**: When serving locally, the app expects the base href to be `/` instead of `/web-metal/`. The current build is configured for GitHub Pages deployment.
+
+## File Structure
+
+```
+docs/                          # Compiled Flutter web application
+├── index.html                 # Main entry point (base href: /web-metal/)
+├── main.dart.js               # Compiled Flutter/Dart code (~3MB)
+├── flutter_service_worker.js  # PWA service worker
+├── flutter_bootstrap.js       # Flutter initialization
+├── manifest.json              # PWA manifest
+├── favicon.png                # App icon
+├── assets/                    # Flutter assets (fonts, images, etc.)
+├── canvaskit/                 # Flutter rendering engine
+├── icons/                     # PWA icons
+└── version.json               # Build version info
+```
